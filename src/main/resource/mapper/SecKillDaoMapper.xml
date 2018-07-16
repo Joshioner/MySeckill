@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.seckill.dao.SecKillDao">
+    <sql id="table">
+        seckill
+    </sql>
+    <!-- 根据商品的id减少库存数量 -->
+    <update id="reduceNumber" >
+         UPDATE
+         <include refid="table"/>
+        SET
+        number = number - 1
+        WHERE
+          seckill_id = #{seckillId}
+        and start_time <![CDATA[<=]]> #{killTime}
+        and end_time >= #{killTime}
+        and number > 0
+    </update>
+
+    <!--根据商品id查询商品库存信息-->
+    <select id="queryById" resultType="SecKill">
+         select seckill_id,name,start_time,end_time,create_time
+         FROM
+           <include refid="table"/>
+        WHERE
+          seckill_id = #{seckillId}
+    </select>
+
+    <!--分页查询商品库存信息-->
+    <select id="queryAll" resultType="SecKill">
+        select seckill_id,name,number,start_time,end_time,create_time
+        FROM
+        <include refid="table"/>
+        ORDER BY  create_time DESC
+        limit #{offset},#{limit}
+    </select>
+    <!--查询所有发商品库存信息-->
+    <select id="querySeckillList" resultType="SecKill">
+        select seckill_id,name,number,start_time,end_time,create_time
+        FROM
+        <include refid="table"/>
+    </select>
+</mapper>
