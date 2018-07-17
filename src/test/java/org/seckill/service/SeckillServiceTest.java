@@ -3,7 +3,7 @@ package org.seckill.service;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.seckill.dto.Exposer;
-import org.seckill.dto.SeckillResult;
+import org.seckill.dto.SeckillExcution;
 import org.seckill.entity.SecKill;
 import org.seckill.exception.RepeatException;
 import org.seckill.exception.SeckillClosedException;
@@ -13,10 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import javax.naming.ldap.ExtendedRequest;
 import java.util.List;
-
-import static org.junit.Assert.*;
 
 /**
  * Created by junbiao on 2018/7/16.
@@ -66,9 +63,9 @@ public class SeckillServiceTest {
         int seckillId = 1001;
         String userPhone = "12233";
         String md5 = "ff6a1f17137fac9eb6542cbc233fd0ca";
-        SeckillResult seckillResult =seckillService.executeSeckill(seckillId,userPhone,md5);
+        SeckillExcution seckillExcution =seckillService.executeSeckill(seckillId,userPhone,md5);
         log.info("-------------------");
-        log.info(seckillResult.toString());
+        log.info(seckillExcution.toString());
         log.info("-------------------");
     }
     //集成测试代码完整逻辑，注意代码的可重复性
@@ -83,7 +80,7 @@ public class SeckillServiceTest {
             log.info("-------------------");
              String md5 = exposer.getMd5();
              try {
-                 SeckillResult result = seckillService.executeSeckill(seckillId,userPhone,md5);
+                 SeckillExcution result = seckillService.executeSeckill(seckillId,userPhone,md5);
                  log.info("-------------------");
                  log.info("result={}", result);
                  log.info("-------------------");

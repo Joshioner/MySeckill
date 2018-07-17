@@ -1,74 +1,48 @@
 package org.seckill.dto;
 
-import org.seckill.entity.SecKill;
-import org.seckill.entity.SuccessKill;
-import org.seckill.enums.SeckillStateEnums;
-
 /**
- * Created by junbiao on 2018/7/15.
+ * Created by junbiao on 2018/7/16.
  */
-//秒杀结果dto
-public class SeckillResult {
-    //秒杀状态
-    private int state;
-    //秒杀状态信息描述
-    private String stateInfo;
-    //商品id
-    private int seckillId;
-    //购买行为
-    private SuccessKill successKill;
-    //秒杀成功的构造函数
-    public SeckillResult(SeckillStateEnums stateEnums, int seckillId, SuccessKill successKill) {
-        this.stateInfo = stateEnums.getStateInfo();
-        this.seckillId = seckillId;
-        this.successKill = successKill;
-    }
-    //秒杀失败的构造函数
+public class SeckillResult<T>{
 
-    public SeckillResult(SeckillStateEnums stateEnums, int seckillId) {
-        this.stateInfo = stateEnums.getStateInfo();
-        this.seckillId = seckillId;
+    private boolean success;
+
+    private T data;
+
+    private String error;
+
+    //执行成功，返回数据信息
+    public SeckillResult(boolean success, T data) {
+        this.success = success;
+        this.data = data;
+    }
+     //执行失败，返回错误信息
+    public SeckillResult(boolean success, String error) {
+        this.success = success;
+        this.error = error;
     }
 
-    public int getState() {
-        return state;
+    public boolean isSuccess() {
+        return success;
     }
 
-    public void setState(int state) {
-        this.state = state;
+    public void setSuccess(boolean success) {
+        this.success = success;
     }
 
-    public String getStateInfo() {
-        return stateInfo;
+    public T getData() {
+        return data;
     }
 
-    public void setStateInfo(String stateInfo) {
-        this.stateInfo = stateInfo;
+    public void setData(T data) {
+        this.data = data;
     }
 
-    public int getSeckillId() {
-        return seckillId;
+    public String getError() {
+        return error;
     }
 
-    public void setSeckillId(int seckillId) {
-        this.seckillId = seckillId;
-    }
-
-    public SuccessKill getSuccessKill() {
-        return successKill;
-    }
-
-    public void setSuccessKill(SuccessKill successKill) {
-        this.successKill = successKill;
-    }
-
-    @Override
-    public String toString() {
-        return "SeckillResult{" +
-                "state=" + state +
-                ", stateInfo='" + stateInfo + '\'' +
-                ", seckillId=" + seckillId +
-                ", successKill=" + successKill +
-                '}';
+    public void setError(String error) {
+        this.error = error;
     }
 }

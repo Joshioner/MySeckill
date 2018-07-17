@@ -5,12 +5,11 @@ package org.seckill.service;
  */
 
 import org.seckill.dto.Exposer;
-import org.seckill.dto.SeckillResult;
+import org.seckill.dto.SeckillExcution;
 import org.seckill.entity.SecKill;
 import org.seckill.exception.RepeatException;
 import org.seckill.exception.SeckillClosedException;
 import org.seckill.exception.SeckillException;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 
@@ -32,6 +31,6 @@ public interface SeckillService {
     Exposer exposeSeckillUrl(int seckillId);
 
     //执行秒杀
-    SeckillResult executeSeckill(int seckillId, String userPhone, String md5)throws RepeatException,SeckillClosedException,SeckillException;
+    SeckillExcution executeSeckill(int seckillId, String userPhone, String md5)throws RepeatException,SeckillClosedException,SeckillException;
 
 }

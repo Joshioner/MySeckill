@@ -3,7 +3,7 @@ package org.seckill.service.Imp;
 import org.seckill.dao.SecKillDao;
 import org.seckill.dao.SuccessKillDao;
 import org.seckill.dto.Exposer;
-import org.seckill.dto.SeckillResult;
+import org.seckill.dto.SeckillExcution;
 import org.seckill.entity.SecKill;
 import org.seckill.entity.SuccessKill;
 import org.seckill.enums.SeckillStateEnums;
@@ -77,7 +77,7 @@ public class SeckillServiceImp implements SeckillService {
     }
 
     @Override
-    public SeckillResult executeSeckill(int seckillId, String userPhone, String md5) throws RepeatException, SeckillClosedException, SeckillException {
+    public SeckillExcution executeSeckill(int seckillId, String userPhone, String md5) throws RepeatException, SeckillClosedException, SeckillException {
         String md = getMd5(seckillId);
         if (md5 == null || !md5.trim().equals(md)){
             throw new SeckillException("seckill data rewrite");
@@ -100,7 +100,7 @@ public class SeckillServiceImp implements SeckillService {
                 }else {
                     //秒杀成功，执行commit
                     SuccessKill successKill = successKillDao.queryByIdWithSecKill(seckillId,userPhone);
-                    return new SeckillResult(SeckillStateEnums.SUCCESS,seckillId,successKill);
+                    return new SeckillExcution(SeckillStateEnums.SUCCESS,seckillId,successKill);
                 }
             }
 
